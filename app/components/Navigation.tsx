@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { HomeIcon, PlusIcon, LogInIcon } from 'lucide-react'
+import { HomeIcon, PlusIcon, Loader2Icon } from 'lucide-react'
 import UserEmail from './UserEmail'
 import { Suspense } from 'react'
 import NavLink from './NavLink'
@@ -12,8 +12,8 @@ export default function Navigation() {
           href="/"
           className="text-xl font-bold tracking-tight text-gray-900 dark:text-white"
         >
-          <span className="hidden md:inline">Mode</span>
-          <span className="md:hidden">M</span>
+          <span className="hidden md:inline">Lines</span>
+          <span className="md:hidden">L</span>
         </Link>
       </div>
 
@@ -33,11 +33,9 @@ export default function Navigation() {
       <div className="pt-4 border-t border-gray-200 dark:border-dark-border-subtle">
         <Suspense
           fallback={
-            <NavLink
-              href="/signin"
-              icon={<LogInIcon size={20} />}
-              label="Sign In"
-            />
+            <div className="flex items-center justify-center">
+              <Loader2Icon className="animate-spin" />
+            </div>
           }
         >
           <UserEmail />
