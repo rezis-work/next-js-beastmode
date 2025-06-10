@@ -11,7 +11,7 @@ export const statusEnum = pgEnum('status', [
 export const priorityEnum = pgEnum('priority', ['low', 'medium', 'high'])
 
 // Issues table
-export const issues = pgTable('issues', {
+export const lines = pgTable('lines', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
   description: text('description'),
@@ -31,30 +31,30 @@ export const users = pgTable('users', {
 })
 
 // Relations between tables
-export const issuesRelations = relations(issues, ({ one }) => ({
+export const linesRelations = relations(lines, ({ one }) => ({
   user: one(users, {
-    fields: [issues.userId],
+    fields: [lines.userId],
     references: [users.id],
   }),
 }))
 
 export const usersRelations = relations(users, ({ many }) => ({
-  issues: many(issues),
+  lines: many(lines),
 }))
 
 // Types
-export type Issue = InferSelectModel<typeof issues>
+export type Line = InferSelectModel<typeof lines>
 export type User = InferSelectModel<typeof users>
 
 // Status and priority labels for display
-export const ISSUE_STATUS = {
+export const LINE_STATUS = {
   backlog: { label: 'Backlog', value: 'backlog' },
   todo: { label: 'Todo', value: 'todo' },
   in_progress: { label: 'In Progress', value: 'in_progress' },
   done: { label: 'Done', value: 'done' },
 }
 
-export const ISSUE_PRIORITY = {
+export const LINE_PRIORITY = {
   low: { label: 'Low', value: 'low' },
   medium: { label: 'Medium', value: 'medium' },
   high: { label: 'High', value: 'high' },

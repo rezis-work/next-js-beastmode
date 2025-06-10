@@ -1,13 +1,13 @@
 import { hash } from 'bcrypt'
 import { v4 as uuidv4 } from 'uuid'
 import { db } from '../db'
-import { issues, users } from '../db/schema'
+import { lines, users } from '../db/schema'
 
 async function main() {
   console.log('Starting database seeding...')
 
   // Clean up existing data
-  await db.delete(issues)
+  await db.delete(lines)
   await db.delete(users)
 
   // Create demo users
@@ -86,7 +86,7 @@ async function main() {
 
   for (const issue of demoIssues) {
     // Explicitly cast string values to enum types to fix type issues
-    await db.insert(issues).values({
+    await db.insert(lines).values({
       title: issue.title,
       description: issue.description,
       priority: issue.priority as 'low' | 'medium' | 'high',
@@ -95,7 +95,7 @@ async function main() {
     })
   }
 
-  console.log(`Created ${demoIssues.length} demo issues`)
+  console.log(`Created ${demoIssues.length} demo lines`)
   console.log('Database seeding completed!')
 }
 

@@ -24,9 +24,9 @@ export default function Navigation() {
           label="Dashboard"
         />
         <NavLink
-          href="/issues/new"
+          href="/lines/new"
           icon={<PlusIcon size={20} />}
-          label="New Issue"
+          label="New Line"
         />
       </nav>
 
