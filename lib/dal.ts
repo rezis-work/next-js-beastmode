@@ -56,3 +56,23 @@ export async function getLines() {
     return []
   }
 }
+
+export const getLine = async (id: number) => {
+  try {
+    const result = await db.query.lines.findFirst({
+      where: eq(lines.id, id),
+      with: {
+        user: true,
+      },
+    })
+
+    if (!result) {
+      return null
+    }
+
+    return result
+  } catch (error) {
+    console.error('Error while getting line with id: ', error)
+    return null
+  }
+}
